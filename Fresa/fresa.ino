@@ -287,9 +287,37 @@ int verifica_fin_carrera()
 
 // ----------------------------------------------------------
 // activa los reles
-
 void setea_reles(int rele)
 {
-  
-
+  switch ( rele ){
+    case vertical:
+      digitalWrite(Q0_2, 0); // Activa rele de enganche posicion
+      break;
+    case fast:
+      digitalWrite(Q0_5, 1); // se asegura de desactivar enganche lento
+      digitalWrite(Q0_4, 0); // engancha rapido
+      break;
+    case slow:
+      digitalWrite(Q0_4, 1); // desactiva enganche rapido
+      digitalWrite(Q0_5, 0); // engancha the gearbox para preciso!
+      break;
+    case embrague: // desactiva ambos
+      digitalWrite(Q0_4, 1); 
+      digitalWrite(Q0_5, 1);
+      break;
+    case forward: 
+      digitalWrite(Q0_7, 1);
+      break;
+    case reverse:
+      digitalWrite(Q0_7, 0);
+      break;
+    case apagado:
+      digitalWrite(Q0_1, 1);
+      break;
+    case encendido:
+      digitalWrite(Q0_1, 1);
+      break;
+    default:
+      break;
+  }
 }
